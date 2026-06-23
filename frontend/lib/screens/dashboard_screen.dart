@@ -57,6 +57,18 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 16,
+              runSpacing: 10,
+              children: [
+                _buildLegendItem(const Color(0xFF00C853), 'Alimentação'),
+                _buildLegendItem(const Color(0xFF0066CC), 'Transporte'),
+                _buildLegendItem(const Color(0xFF8A05BE), 'Lazer'),
+                _buildLegendItem(const Color(0xFFFF7A00), 'Contas'),
+              ],
+            ),
             const SizedBox(height: 30),
             
             // Bottom Bar Chart Section
@@ -116,6 +128,17 @@ class DashboardScreen extends StatelessWidget {
           Text(value, style: TextStyle(color: valueColor, fontSize: isLarge ? 28 : 22, fontWeight: FontWeight.bold)),
         ],
       ),
+    );
+  }
+
+  Widget _buildLegendItem(Color color, String text) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(width: 12, height: 12, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        const SizedBox(width: 6),
+        Text(text, style: const TextStyle(color: Colors.white70, fontSize: 14)),
+      ],
     );
   }
 }
