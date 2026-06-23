@@ -20,6 +20,12 @@ app.add_middleware(
 
 class ChatMessage(BaseModel):
     message: str
+    personality: str = "amigavel"
+
+class MetaCreate(BaseModel):
+    nome: str
+    valor_alvo: float
+    valor_atual: float = 0.0
 
 @app.get("/")
 def read_root():
@@ -44,7 +50,7 @@ def get_debts():
 
 @app.post("/api/chat")
 def post_chat(chat: ChatMessage):
-    response = chat_with_mentor(chat.message, [])
+    response = chat_with_mentor(chat.message, [], personality=chat.personality)
     return {"reply": response}
 
 @app.post("/api/upload-receipt")
@@ -92,6 +98,27 @@ def get_dashboard_summary():
             {"categoria": "Lazer", "valor": 950.00, "cor_hex": "#8A05BE"},
             {"categoria": "Contas", "valor": 500.00, "cor_hex": "#FF7A00"}
         ]
+    }
+
+@app.post("/api/metas")
+def create_meta(meta: MetaCreate):
+    return {"message": "Meta criada", "meta": meta.dict()}
+
+@app.get("/api/metas")
+def get_metas():
+    return [
+        {"id": 1, "nome": "Viagem para Europa", "valor_alvo": 15000.0, "valor_atual": 3500.0},
+        {"id": 2, "nome": "Reserva de Emergência", "valor_alvo": 10000.0, "valor_atual": 8000.0}
+    ]
+
+@app.get("/api/gamification/score")
+def get_score():
+    return {
+        "score": 850,
+        "nivel": "Investidor Ouro",
+        "xp_proximo_nivel": 1000,
+        "desafio_ativo": "Gastar menos de R$ 200 em Lazer esta semana",
+        "dica": "Você economizou R$ 150 em transporte este mês!"
     }
 
 if __name__ == "__main__":

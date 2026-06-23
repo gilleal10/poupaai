@@ -4,6 +4,7 @@ import 'screens/expense_entry_screen.dart';
 import 'screens/credit_cards_screen.dart';
 import 'screens/ai_chat_screen.dart';
 import 'screens/login_screen.dart';
+import 'screens/dreams_screen.dart';
 
 void main() {
   runApp(const PoupaaiApp());
@@ -44,6 +45,7 @@ class _MainScreenState extends State<MainScreen> {
     const DashboardScreen(),
     const ExpenseEntryScreen(),
     const CreditCardsScreen(),
+    const DreamsScreen(),
     const AIChatScreen(),
   ];
 
@@ -66,6 +68,7 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Resumo'),
           BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: 'Lançar'),
           BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: 'Cartões'),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Sonhos'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Mentor IA'),
         ],
       ),

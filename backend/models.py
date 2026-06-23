@@ -10,6 +10,7 @@ class Usuario(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     contas = relationship("Conta", back_populates="usuario")
+    metas = relationship("MetaSonho", back_populates="usuario")
 
 class Conta(Base):
     __tablename__ = 'contas'
@@ -44,3 +45,12 @@ class Despesa(Base):
     
     conta = relationship("Conta", back_populates="despesas")
     cartao = relationship("CartaoCredito", back_populates="despesas")
+
+class MetaSonho(Base):
+    __tablename__ = 'metas'
+    id = Column(Integer, primary_key=True, index=True)
+    nome = Column(String, index=True)
+    valor_alvo = Column(Float)
+    valor_atual = Column(Float, default=0.0)
+    usuario_id = Column(Integer, ForeignKey('usuarios.id'), nullable=True)
+    usuario = relationship("Usuario", back_populates="metas")

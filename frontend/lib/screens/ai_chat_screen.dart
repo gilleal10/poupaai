@@ -12,11 +12,33 @@ class _AIChatScreenState extends State<AIChatScreen> {
     "Olá! Sou seu Mentor IA. Como posso ajudar com suas finanças hoje?",
     "Como seu Mentor de IA, sugiro que você foque primeiro na dívida com maior CET. Vamos analisar o painel de dívidas?"
   ];
+  
+  bool _isCFO = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Mentor IA'), backgroundColor: Colors.transparent, elevation: 0),
+      appBar: AppBar(
+        title: const Text('Mentor IA'), 
+        backgroundColor: Colors.transparent, 
+        elevation: 0,
+        actions: [
+          Row(
+            children: [
+              const Text('Amigo', style: TextStyle(fontSize: 12, color: Colors.tealAccent)),
+              Switch(
+                value: _isCFO,
+                activeColor: Colors.redAccent,
+                onChanged: (val) {
+                  setState(() { _isCFO = val; });
+                },
+              ),
+              const Text('CFO', style: TextStyle(fontSize: 12, color: Colors.redAccent)),
+              const SizedBox(width: 16),
+            ],
+          )
+        ]
+      ),
       body: Column(
         children: [
           Expanded(

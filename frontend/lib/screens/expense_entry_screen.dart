@@ -1,7 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class ExpenseEntryScreen extends StatelessWidget {
+class ExpenseEntryScreen extends StatefulWidget {
   const ExpenseEntryScreen({super.key});
+
+  @override
+  State<ExpenseEntryScreen> createState() => _ExpenseEntryScreenState();
+}
+
+class _ExpenseEntryScreenState extends State<ExpenseEntryScreen> {
+  final TextEditingController _valorController = TextEditingController();
+  final TextEditingController _descController = TextEditingController();
+  bool _clipboardChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkClipboardForPix();
+    });
+  }
+
+  Future<void> _checkClipboardForPix() async {
+    if (_clipboardChecked) return;
+    _clipboardChecked = true;
+    
+    ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
+    if (data != null && data.text != null) {
+      String text = data.text!;
+      if (text.contains("R\$") || text.toLowerCase().contains("pix")) {
+        RegExp regExp = RegExp(r"(\d+[\.,]\d{2})");
+        var match = regExp.firstMatch(text);
+        if (match != null) {
+          String valueFound = match.group(0)!;
+          
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Valor de R\$ $valueFound detectado copiado. Deseja registrar?'),
+              action: SnackBarAction(
+                label: 'SIM',
+                textColor: Colors.tealAccent,
+                onPressed: () {
+                  setState(() {
+                    _valorController.text = valueFound;
+                    _descController.text = "Pix Automático";
+                  });
+                },
+              ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: const Color(0xFF1E1E1E),
+            ),
+          );
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +74,13 @@ class ExpenseEntryScreen extends StatelessWidget {
                 backgroundColor: Colors.tealAccent,
                 foregroundColor: Colors.black,
               ),
-              onPressed: () {
-                // Aqui vai a chamada para ImagePicker().pickImage(source: ImageSource.camera)
-                // E o envio para /api/upload-receipt
-              },
+              onPressed: () {},
             ),
             const SizedBox(height: 30),
             const Text('Ou insira manualmente:', style: TextStyle(fontSize: 16)),
             const SizedBox(height: 10),
             TextField(
+              controller: _valorController,
               decoration: InputDecoration(
                 labelText: 'Valor (R\$)',
                 filled: true,
@@ -39,6 +91,7 @@ class ExpenseEntryScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextField(
+              controller: _descController,
               decoration: InputDecoration(
                 labelText: 'Descrição',
                 filled: true,

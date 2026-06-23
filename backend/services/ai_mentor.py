@@ -12,8 +12,11 @@ def generate_diagnostic(financial_data):
         ]
     }
 
-def chat_with_mentor(message, history):
+def chat_with_mentor(message, history, personality="amigavel"):
     """
     Mocks the AI Chatbot interaction.
     """
-    return "Como seu Mentor de IA, sugiro que você foque primeiro na dívida com maior CET. Vamos analisar o painel de dívidas?"
+    if personality == "cfo":
+        return f"[CFO Implacável] Francamente... '{message}'? Seu dinheiro está indo pelo ralo. Precisamos estancar a sangria dessa sua dívida com 12% de CET imediatamente."
+    else:
+        return f"[Mentor Amigável] Olá! Sobre '{message}', entendo perfeitamente. Vamos juntos analisar seu orçamento com calma para ver como encaixar isso nos seus sonhos, combinado?"
