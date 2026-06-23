@@ -35,6 +35,7 @@ class Despesa(Base):
     __tablename__ = 'despesas'
     id = Column(Integer, primary_key=True, index=True)
     descricao = Column(String)
+    categoria = Column(String, default="Outros")
     valor = Column(Float)
     data = Column(DateTime, default=datetime.utcnow)
     comprovante_url = Column(String, nullable=True) # Foto da camera

@@ -53,6 +53,22 @@ class ExpenseEntryScreen extends StatelessWidget {
                 fillColor: const Color(0xFF1E1E1E),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
               ),
+              hint: const Text('Categoria'),
+              items: const [
+                DropdownMenuItem(value: 'Alimentação', child: Text('Alimentação')),
+                DropdownMenuItem(value: 'Transporte', child: Text('Transporte')),
+                DropdownMenuItem(value: 'Lazer', child: Text('Lazer')),
+                DropdownMenuItem(value: 'Contas', child: Text('Contas de Casa')),
+              ],
+              onChanged: (value) {},
+            ),
+            const SizedBox(height: 10),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: const Color(0xFF1E1E1E),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              ),
               hint: const Text('Selecione a Conta / Cartão'),
               items: const [
                 DropdownMenuItem(value: '1', child: Text('Conta Corrente')),
