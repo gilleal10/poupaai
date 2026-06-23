@@ -149,14 +149,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('Criar meu acesso', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-                            SizedBox(height: 4),
-                            Text('Assine e comece agora', style: TextStyle(color: Colors.white54, fontSize: 14)),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text('Criar meu acesso', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                              SizedBox(height: 4),
+                              Text('Assine e comece agora', style: TextStyle(color: Colors.white54, fontSize: 12)),
+                            ],
+                          ),
                         ),
+                        const SizedBox(width: 8),
                         Row(
                           children: [
                             Column(
@@ -166,13 +169,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: const [
-                                    Text('R\$ 19,90', style: TextStyle(color: primaryColor, fontSize: 22, fontWeight: FontWeight.bold)),
-                                    Text(' /mês', style: TextStyle(color: Colors.white30, fontSize: 12)),
+                                    Text('R\$ 19,90', style: TextStyle(color: primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
+                                    Text(' /mês', style: TextStyle(color: Colors.white30, fontSize: 11)),
                                   ],
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 12),
+                            const SizedBox(width: 8),
                             const Icon(Icons.arrow_forward, color: primaryColor, size: 20),
                           ],
                         ),
