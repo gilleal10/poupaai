@@ -8,3 +8,5 @@ pydantic
 python-multipart
 google-generativeai
 pymupdf
+passlib[bcrypt]
+python-jose[cryptography]

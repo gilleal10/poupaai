@@ -4,12 +4,21 @@ from datetime import datetime
 
 Base = declarative_base()
 
+class Usuario(Base):
+    __tablename__ = 'usuarios'
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    contas = relationship("Conta", back_populates="usuario")
+
 class Conta(Base):
     __tablename__ = 'contas'
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String, index=True)
     tipo = Column(String) # 'fixa' ou 'variavel'
     valor_previsto = Column(Float, nullable=True)
+    usuario_id = Column(Integer, ForeignKey('usuarios.id'), nullable=True)
+    usuario = relationship("Usuario", back_populates="contas")
     despesas = relationship("Despesa", back_populates="conta")
 
 class CartaoCredito(Base):

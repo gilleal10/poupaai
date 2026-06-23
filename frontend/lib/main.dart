@@ -3,6 +3,7 @@ import 'screens/dashboard_screen.dart';
 import 'screens/expense_entry_screen.dart';
 import 'screens/credit_cards_screen.dart';
 import 'screens/ai_chat_screen.dart';
+import 'screens/login_screen.dart';
 
 void main() {
   runApp(const PoupaaiApp());
@@ -16,13 +17,15 @@ class PoupaaiApp extends StatelessWidget {
     return MaterialApp(
       title: 'POUPAAI',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.tealAccent,
+      theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFF121212),
-        useMaterial3: true,
+        primaryColor: Colors.tealAccent,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF121212),
+          elevation: 0,
+        ),
       ),
-      home: const MainScreen(),
+      home: const LoginScreen(),
     );
   }
 }
