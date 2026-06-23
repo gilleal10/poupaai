@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/dashboard_screen.dart';
-import 'screens/dream_manager_screen.dart';
-import 'screens/debt_panel_screen.dart';
+import 'screens/expense_entry_screen.dart';
+import 'screens/credit_cards_screen.dart';
 import 'screens/ai_chat_screen.dart';
 
 void main() {
@@ -39,8 +39,8 @@ class _MainScreenState extends State<MainScreen> {
   
   final List<Widget> _screens = [
     const DashboardScreen(),
-    const DreamManagerScreen(),
-    const DebtPanelScreen(),
+    const ExpenseEntryScreen(),
+    const CreditCardsScreen(),
     const AIChatScreen(),
   ];
 
@@ -60,9 +60,9 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor: Colors.tealAccent,
         unselectedItemColor: Colors.grey,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Sonhos'),
-          BottomNavigationBarItem(icon: Icon(Icons.money_off), label: 'Dívidas'),
+          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Resumo'),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: 'Lançar'),
+          BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: 'Cartões'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Mentor IA'),
         ],
       ),

@@ -1,8 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from services.ai_mentor import generate_diagnostic, chat_with_mentor
 from services.debt_analysis import calculate_cet_newton_raphson, compare_with_market_rates
+from services.vision_parser import process_receipt_image, process_credit_card_pdf
 import uvicorn
 
 app = FastAPI(title="POUPAAI API", description="Backend for POUPAAI Personal Finance App", version="1.0.0")
@@ -43,6 +44,18 @@ def get_debts():
 def post_chat(chat: ChatMessage):
     response = chat_with_mentor(chat.message, [])
     return {"reply": response}
+
+@app.post("/api/upload-receipt")
+async def upload_receipt(file: UploadFile = File(...)):
+    contents = await file.read()
+    data = process_receipt_image(contents)
+    return {"status": "sucesso", "dados_extraidos": data}
+
+@app.post("/api/upload-invoice")
+async def upload_invoice(file: UploadFile = File(...)):
+    contents = await file.read()
+    data = process_credit_card_pdf(contents)
+    return {"status": "sucesso", "dados_extraidos": data}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

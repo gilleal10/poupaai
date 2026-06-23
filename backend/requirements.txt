@@ -6,3 +6,5 @@ scipy
 numpy
 pydantic
 python-multipart
+google-generativeai
+pymupdf
