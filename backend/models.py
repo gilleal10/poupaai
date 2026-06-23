@@ -27,6 +27,8 @@ class CartaoCredito(Base):
     banco = Column(String, index=True)
     limite = Column(Float)
     dia_fechamento = Column(Integer)
+    dia_vencimento = Column(Integer)
+    cor_hex = Column(String, default="#8A05BE")
     despesas = relationship("Despesa", back_populates="cartao")
 
 class Despesa(Base):
