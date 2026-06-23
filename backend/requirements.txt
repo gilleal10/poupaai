@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchemy
+pandas
+scipy
+numpy
+pydantic
+python-multipart
