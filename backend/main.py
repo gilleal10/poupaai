@@ -82,11 +82,16 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 @app.get("/api/dashboard/summary")
 def get_dashboard_summary():
     return {
-        "current_month_expenses": 2500.00,
-        "current_month_income": 5000.00,
-        "next_month_projection": 3200.00,
-        "fixed_expenses_next_month": 1500.00,
-        "credit_card_installments_next_month": 1700.00
+        "total_mes_atual": 3450.00,
+        "gasto_medio_diario": 138.00,
+        "limite_alerta": 4000.00,
+        "projecao_proximo_mes": 3200.00,
+        "despesas_por_categoria": [
+            {"categoria": "Alimentação", "valor": 1200.00, "cor_hex": "#00C853"},
+            {"categoria": "Transporte", "valor": 800.00, "cor_hex": "#0066CC"},
+            {"categoria": "Lazer", "valor": 950.00, "cor_hex": "#8A05BE"},
+            {"categoria": "Contas", "valor": 500.00, "cor_hex": "#FF7A00"}
+        ]
     }
 
 if __name__ == "__main__":
