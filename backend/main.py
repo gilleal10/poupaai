@@ -22,6 +22,15 @@ class ChatMessage(BaseModel):
     message: str
     personality: str = "amigavel"
 
+class OnboardingData(BaseModel):
+    fez_onboarding: bool
+    regra_cartao: str
+    objetivo_economia: float
+
+class BudgetCategory(BaseModel):
+    categoria: str
+    limite: float
+
 class MetaCreate(BaseModel):
     nome: str
     valor_alvo: float
@@ -119,6 +128,31 @@ def get_score():
         "xp_proximo_nivel": 1000,
         "desafio_ativo": "Gastar menos de R$ 200 em Lazer esta semana",
         "dica": "Você economizou R$ 150 em transporte este mês!"
+    }
+
+@app.post("/api/onboarding")
+def complete_onboarding(data: OnboardingData):
+    return {"message": "Onboarding concluído com sucesso", "regra": data.regra_cartao}
+
+@app.post("/api/import")
+async def import_data(file: UploadFile = File(...)):
+    # Simulação da leitura de OFX/CSV/XLS
+    return {"status": "sucesso", "transacoes_importadas": 15, "total_valor": 1450.00}
+
+@app.post("/api/budget")
+def set_budget(categories: list[BudgetCategory]):
+    return {"message": "Orçamento atualizado", "categorias": len(categories)}
+
+@app.get("/api/budget")
+def get_budget():
+    return {
+        "renda_total": 4000.00,
+        "categorias": [
+            {"categoria": "Casa", "limite": 1500.00, "gasto_atual": 0.00, "cor": "#0066CC"},
+            {"categoria": "Educação", "limite": 800.00, "gasto_atual": 0.00, "cor": "#8A05BE"},
+            {"categoria": "Lazer", "limite": 500.00, "gasto_atual": 0.00, "cor": "#FF7A00"},
+            {"categoria": "Saúde", "limite": 400.00, "gasto_atual": 0.00, "cor": "#00C853"}
+        ]
     }
 
 if __name__ == "__main__":

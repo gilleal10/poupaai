@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Boolean
 from sqlalchemy.orm import declarative_base, relationship
 from datetime import datetime
 
@@ -9,8 +9,11 @@ class Usuario(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+    fez_onboarding = Column(Boolean, default=False)
+    regra_cartao = Column(String, default='compra')
     contas = relationship("Conta", back_populates="usuario")
     metas = relationship("MetaSonho", back_populates="usuario")
+    planejamentos = relationship("PlanejamentoCategoria", back_populates="usuario")
 
 class Conta(Base):
     __tablename__ = 'contas'
@@ -54,3 +57,11 @@ class MetaSonho(Base):
     valor_atual = Column(Float, default=0.0)
     usuario_id = Column(Integer, ForeignKey('usuarios.id'), nullable=True)
     usuario = relationship("Usuario", back_populates="metas")
+
+class PlanejamentoCategoria(Base):
+    __tablename__ = 'planejamentos'
+    id = Column(Integer, primary_key=True, index=True)
+    categoria = Column(String, index=True)
+    limite = Column(Float)
+    usuario_id = Column(Integer, ForeignKey('usuarios.id'), nullable=True)
+    usuario = relationship("Usuario", back_populates="planejamentos")

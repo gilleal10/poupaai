@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poupaai/screens/onboarding_screen.dart';
 import '../main.dart'; // To access MainScreen
 
 class LoginScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _login() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const MainScreen()),
+      MaterialPageRoute(builder: (context) => const OnboardingScreen()),
     );
   }
 
