@@ -9,6 +9,8 @@ class Usuario(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow) # Para controle de 7 dias
+    is_premium = Column(Boolean, default=False)
     fez_onboarding = Column(Boolean, default=False)
     regra_cartao = Column(String, default='compra')
     contas = relationship("Conta", back_populates="usuario")

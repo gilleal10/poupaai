@@ -6,9 +6,15 @@ from services.ai_mentor import generate_diagnostic, chat_with_mentor
 from services.debt_analysis import calculate_cet_newton_raphson, compare_with_market_rates
 from services.vision_parser import process_receipt_image, process_credit_card_pdf
 from services.auth import get_password_hash, verify_password, create_access_token
+from database import init_db, get_db
+from sqlalchemy.orm import Session
 import uvicorn
 
 app = FastAPI(title="POUPAAI API", description="Backend for POUPAAI Personal Finance App", version="1.0.0")
+
+@app.on_event("startup")
+def on_startup():
+    init_db()
 
 app.add_middleware(
     CORSMiddleware,

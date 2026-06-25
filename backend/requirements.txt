@@ -10,3 +10,4 @@ google-generativeai
 pymupdf
 passlib[bcrypt]
 python-jose[cryptography]
+psycopg2-binary
